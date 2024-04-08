@@ -41,7 +41,7 @@ export const Header = () => {
           </>
         )}
         <div
-          className="w-5 h-4 flex sm:hidden flex-col justify-between cursor-pointer"
+          className="w-5 h-4 flex flex-col justify-between cursor-pointer sm:hidden"
           onClick={() => setOpen(!open)}
         >
           <div className="w-full h-0.5 bg-black"></div>
