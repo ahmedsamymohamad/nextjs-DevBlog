@@ -3,17 +3,25 @@ import Tabs from "../components/Tabs";
 import AddBlog from "../components/AddBlog";
 import AddCategory from "../components/AddCategory";
 
-const getCategories = async () => {
-  const res = await fetch(`${process.env.API_URL}/categories`, {
-    cache: "no-store",
-  });
 
-  if (!res.ok) {
-    throw new Error("failed");
+const getCategories = async () => {
+  try {
+    const res = await fetch(`${process.env.API_URL}/categories`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch categories");
+    }
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    throw error; // Rethrow the error to propagate it up
   }
-  return res.json();
 };
+
 const Dashboard = async ({ searchParams }) => {
+  
   const categories = await getCategories();
   const index = parseInt(searchParams.index) || 1;
   return (
